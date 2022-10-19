@@ -1,6 +1,6 @@
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/themes/dark.css';
-import { Ukrainian } from 'flatpickr/dist/l10n/uk.js';
+// import { Ukrainian } from 'flatpickr/dist/l10n/uk.js';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const getEl = selector => document.querySelector(selector);
@@ -24,13 +24,18 @@ const options = {
     if (chosenDate <= runMoment) {
       console.log('runMoment -->', runMoment);
 
-      Notify.failure('Please choose a date in the future');
+      Notify.warning('Please choose a date in the future');
       return;
     } else {
       startBtn.disabled = false;
+
+      const updateClocks = convertMs(chosenDate - runMoment);
+      Object.keys(updateClocks).forEach(key => {
+        getEl(`[data-${key}]`).textContent = updateClocks[key];
+      });
     }
   },
-  locale: Ukrainian,
+  // locale: Ukrainian,
 };
 
 flatpickr('#datetime-picker', options);
@@ -41,10 +46,10 @@ function onStartBtn() {
   timerId = setInterval(() => {
     currentTimer = chosenDate - Date.now();
 
-    const time = convertMs(currentTimer);
+    const timerIndicator = convertMs(currentTimer);
 
-    Object.keys(time).forEach(key => {
-      getEl(`[data-${key}]`).textContent = time[key];
+    Object.keys(timerIndicator).forEach(key => {
+      getEl(`[data-${key}]`).textContent = timerIndicator[key];
     });
     console.log('currentTimer -->', currentTimer);
 
@@ -73,3 +78,11 @@ function convertMs(ms) {
 }
 
 startBtn.addEventListener('click', onStartBtn);
+
+getEl('.timer').style.display = 'fLex';
+getEl('.timer').style.flexWrap = 'wrap';
+getEl('.timer').style.gap = '30px';
+getEl('.timer').style.justifyContent = 'center';
+
+getEl('.field').style.border = '2px dashed black';
+getEl('.field').style.padding = '10px';
