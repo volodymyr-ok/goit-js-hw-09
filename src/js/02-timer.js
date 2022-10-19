@@ -4,6 +4,7 @@ import 'flatpickr/dist/themes/dark.css';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const getEl = selector => document.querySelector(selector);
+const getAllEls = selector => document.querySelectorAll(selector);
 const startBtn = getEl('[data-start]');
 
 startBtn.disabled = true;
@@ -22,8 +23,6 @@ const options = {
     chosenDate = selectedDates[0];
     console.log('selectedDates', selectedDates);
     if (chosenDate <= runMoment) {
-      console.log('runMoment -->', runMoment);
-
       Notify.warning('Please choose a date in the future');
       return;
     } else {
@@ -51,8 +50,6 @@ function onStartBtn() {
     Object.keys(timerIndicator).forEach(key => {
       getEl(`[data-${key}]`).textContent = timerIndicator[key];
     });
-    console.log('currentTimer -->', currentTimer);
-
     if (currentTimer < 1000) {
       clearInterval(timerId);
     }
@@ -84,5 +81,5 @@ getEl('.timer').style.flexWrap = 'wrap';
 getEl('.timer').style.gap = '30px';
 getEl('.timer').style.justifyContent = 'center';
 
-getEl('.field').style.border = '2px dashed black';
-getEl('.field').style.padding = '10px';
+document.querySelectorAll('.field').style.border = '2px dashed black';
+getAllEls('.field').style.padding = '10px';
