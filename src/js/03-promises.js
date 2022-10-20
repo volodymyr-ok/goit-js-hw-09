@@ -5,6 +5,7 @@ form.addEventListener('submit', onSubmitBtn);
 
 function onSubmitBtn(evt) {
   evt.preventDefault();
+
   const { delay, amount, step } = form;
   let presentStep = +delay.value;
 

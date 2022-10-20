@@ -16,3 +16,68 @@ img {
   display: block;
   max-width: 100%;
 }
+
+.timer-body {
+  background-color: #2e3041;
+  color: white;
+}
+
+#datetime-picker {
+  padding: 10px;
+  background-color: #8c4f61;
+  display: block;
+  margin: 0 auto 20px;
+  border-radius: 20px;
+  width: 132px;
+  color: white;
+}
+
+.timer-button:disabled {
+  border: 2px dashed rgba(128, 128, 128, 0.201);
+  background-color: rgba(128, 128, 128, 0.201);
+  color: rgba(128, 128, 128, 0.201);
+}
+
+.timer-button {
+  border: 2px dashed #808c4f;
+  margin-top: 50px;
+  padding: 10px;
+  background-color: #3f2e41;
+  color: white;
+  border-radius: 20px;
+  display: block;
+  margin: 10px auto;
+}
+
+.timer-button:active {
+  background-color: #808c4f;
+}
+
+.timer {
+  display: flex;
+  gap: 30px;
+  justify-content: center;
+  background-color: #523340;
+  margin: 50px auto;
+  padding: 40px;
+  border-radius: 100px;
+  border: 5px solid #f68383;
+  width: 600px;
+}
+
+.field {
+  background-color: #808c4f29;
+  border: 2px dashed #808c4f;
+  border-radius: 50%;
+  padding: 20px;
+  width: 100px;
+  height: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+}
+
+.timer-started {
+  background-color: #53670156;
+}

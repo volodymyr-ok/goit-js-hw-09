@@ -4,8 +4,12 @@ import 'flatpickr/dist/themes/dark.css';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 
 const getEl = selector => document.querySelector(selector);
-const getAllEls = selector => document.querySelectorAll(selector);
 const startBtn = getEl('[data-start]');
+
+// -------------------------- CLASSES FOR TIMER STYLIZATION --------------------------
+getEl('body').classList.add('timer-body');
+startBtn.classList.add('timer-button');
+// -------------------------- -------------------------- --------------------------
 
 startBtn.disabled = true;
 const runMoment = Date.now();
@@ -21,25 +25,28 @@ const options = {
   onClose(selectedDates) {
     console.log(selectedDates[0]);
     chosenDate = selectedDates[0];
-    console.log('selectedDates', selectedDates);
     if (chosenDate <= runMoment) {
+      startBtn.disabled = true;
+
       Notify.warning('Please choose a date in the future');
       return;
     } else {
       startBtn.disabled = false;
 
-      const updateClocks = convertMs(chosenDate - runMoment);
-      Object.keys(updateClocks).forEach(key => {
-        getEl(`[data-${key}]`).textContent = updateClocks[key];
-      });
+      // const updateClocks = convertMs(chosenDate - runMoment);
+      // Object.keys(updateClocks).forEach(key => {
+      //   getEl(`[data-${key}]`).textContent = updateClocks[key];
+      // });
     }
   },
   // locale: Ukrainian,
 };
-
 flatpickr('#datetime-picker', options);
 
 function onStartBtn() {
+  document
+    .querySelectorAll('.field')
+    .forEach(el => el.classList.add('timer-started')); //class for timer stilization
   startBtn.disabled = true;
 
   timerId = setInterval(() => {
@@ -75,11 +82,3 @@ function convertMs(ms) {
 }
 
 startBtn.addEventListener('click', onStartBtn);
-
-getEl('.timer').style.display = 'fLex';
-getEl('.timer').style.flexWrap = 'wrap';
-getEl('.timer').style.gap = '30px';
-getEl('.timer').style.justifyContent = 'center';
-
-document.querySelectorAll('.field').style.border = '2px dashed black';
-getAllEls('.field').style.padding = '10px';
