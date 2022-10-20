@@ -5,8 +5,8 @@ form.addEventListener('submit', onSubmitBtn);
 
 function onSubmitBtn(evt) {
   evt.preventDefault();
-
-  const { delay, amount, step } = form;
+  console.dir(evt);
+  const { delay, amount, step } = evt.target.elements;
   let presentStep = +delay.value;
 
   for (let i = 1; i <= amount.value; i++) {
@@ -20,6 +20,8 @@ function onSubmitBtn(evt) {
 
     presentStep += +step.value;
   }
+
+  // evt.target.reset();
 }
 
 function createPromise(position, delay) {
